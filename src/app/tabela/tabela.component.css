@@ -52,6 +52,10 @@
     margin-bottom: 15px;
   }
 
+  .btnSalvarDec{
+    margin-top: 32px;
+  }
+
   @media(max-width: 574px) {
     .filtro{
       margin-top: -50px;

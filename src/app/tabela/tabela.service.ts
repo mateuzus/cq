@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ThfMenuFilter, ThfMenuItemFiltered, ThfTableColumn } from '@totvs/thf-ui';
-import { Observable } from 'rxjs';
+import { ThfTableColumn } from '@totvs/thf-ui';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,7 +14,6 @@ export class TabelaService {
 
   getColumns(): Array<ThfTableColumn> {
     return [
-
       { property: 'nr-ficha', label: 'Roteiro Insp' },
       { property: "cod-emitente", label: "Emit" },
       { property: 'nome-emit', label: 'Nome' },
@@ -29,7 +27,7 @@ export class TabelaService {
 
   getColumnsDecisao(): Array<ThfTableColumn> {
     return [
-      { property: '', label: 'Seq' },
+      { property: 'sequencia', label: 'Seq' },
       { property: '', label: 'Decisão' },
       { property: '', label: 'Cod Dev' },
       { property: '', label: 'Descrição' },

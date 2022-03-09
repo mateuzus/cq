@@ -63,6 +63,9 @@ export class TabelaComponent implements OnInit {
   deposito
   localizacao
 
+  //Array para criar a sequencia
+  sequenciaArray: Array<any> = []
+
   @ViewChild(ThfModalComponent, { static: true }) thfModal: ThfModalComponent;
   @ViewChild(ThfTableComponent, { static: true }) thfTable: ThfTableComponent;
 
@@ -175,6 +178,11 @@ export class TabelaComponent implements OnInit {
     action: () => {
       this.thfModal.close()
     }
+  }
+
+  addSequencia() {
+    this.sequenciaArray.push({'sequencia': this.sequencia})
+    console.log(this.sequenciaArray)
   }
 
   openModalFilter(): void {
