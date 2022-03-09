@@ -1,0 +1,59 @@
+.logo{
+    width: 82px;
+    height: 50px;
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+
+  .btn-filter {
+    margin-bottom: 15px;
+    margin-right: 10px;
+  }
+  
+  .roteiros {
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .paragraph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    color: darkgray;
+  }
+
+  .descComp {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #0194be;
+  }
+
+  .stronger {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    margin-left: 10px;
+  }
+
+  .rejeitado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tableDec {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  @media(max-width: 574px) {
+    .filtro{
+      margin-top: -50px;
+    }
+  }

@@ -1,0 +1,148 @@
+<div class="thf-wrapper">
+
+  <thf-menu [t-menus]="menus" t-collapsed>
+    <div class="thf-menu-header-container">
+      <div class="thf-menu-logo">
+        <div *t-menu-header-template>
+          <a href="/"><img class="logo" src="../../assets/totvs-logo-menu.svg" alt="totvs icon"></a>
+        </div>
+      </div>
+    </div>
+  </thf-menu>
+
+  <thf-toolbar t-title="Roteiros CQ"></thf-toolbar>
+
+  <thf-page-default t-title="Roteiros">
+
+    <thf-button class="btn-filter" t-label="Filtro" (t-click)="openModalFilter()" t-type="primary"></thf-button>
+    <thf-button t-label="Decisão" t-type="primary" (t-click)="openModalDecisao()"></thf-button>
+
+    <thf-modal class="filtro" title="Filtro" [t-primary-action]="getPrimaryAction()"
+      [t-secondary-action]="getSecondaryAction()" t-click-out="true">
+      <div *ngIf="modal_type == 'filter'">
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="it_codigo_ini" t-label="Cód. Item Ini" J></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="it_codigo_fim" t-label="Cód. Item Fim"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="cod_estabel_ini" t-label="Cód. Estabel Ini"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="cod_estabel_fim" t-label="Cód. Estabel Fim"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="cod_emitente_ini" t-label="Cód. Emitente Ini"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="cod_emitente_fim" t-label="Cód. Emitente Fim"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="serie_docto_ini" t-label="Série Doc. Ini"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="serie_docto_fim" t-label="Série Doc. Fim"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="nro_docto_ini" t-label="Nmr. Doc. Ini"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="nro_docto_fim" t-label="Nmr. Doc. Fim"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="nr_ficha_ini" t-label="Nmr. Ficha Ini"></thf-input>
+        <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="nr_ficha_fim" t-label="Nmr. Ficha Fim"></thf-input>
+
+        <div class="container">
+
+          <div class="check">
+            <input type="checkbox" checked [(ngModel)]="log_pendente"> Pendente <br>
+            <input type="checkbox" checked [(ngModel)]="log_analise"> Em Analise <br>
+            <input type="checkbox" checked [(ngModel)]="log_pendret"> Pend. Retorno <br>
+          </div>
+
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="log_terminado"> Terminado <br>
+            <input type="checkbox" [(ngModel)]="log_cancelado"> Cancelado <br>
+            <input type="checkbox" [(ngModel)]="log_pendnf"> Pend. NF <br>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="modal_type == 'texto'">
+        <div class="descComp">
+          Exame: <b>{{codExame}}</b>
+          Desc: <b>{{descComp}}</b>
+          Val. Ref: <b>{{valorComp}}</b>
+        </div>
+        <thf-textarea t-focus="true" t-required="true"></thf-textarea>
+      </div>
+
+      <div *ngIf="modal_type == 'numerico'">
+        <div class="descComp">
+          Exame: <b>{{codExame}}</b>
+          Desc: <b>{{descComp}}</b>
+          Val. Ref: <b>{{valorComp}}</b>
+        </div>
+        <thf-decimal class="thf-md-6" name="numerico" t-focus="true" [t-thousand-maxlength]="thousandMaxlength"
+          t-decimals-length="0" t-label="Result Min" t-placeholder="0"></thf-decimal>
+        <thf-decimal class="thf-md-6" name="numerico" t-label="Result Max" [t-thousand-maxlength]="thousandMaxlength"
+          t-decimals-length="0" t-placeholder="0"></thf-decimal>
+      </div>
+
+      <div *ngIf="modal_type == 'faixa'">
+        <div class="descComp">
+          Exame: <b>{{codExame}}</b>
+          Desc: <b>{{descComp}}</b>
+          Val. Ref: <b>{{valorComp}}</b>
+        </div>
+        <thf-decimal class="thf-md-6" name="faixa" t-focus="true" t-label="Result Min"
+          [t-thousand-maxlength]="thousandMaxlength" t-placeholder="0,00"></thf-decimal>
+        <thf-decimal class="thf-md-6" name="faixa" t-label="Result Max" [t-thousand-maxlength]="thousandMaxlength"
+          t-placeholder="0,00"></thf-decimal>
+      </div>
+      <div *ngIf="ultimo == true">
+        <thf-input t-label="Qtd. Rej." class="thf-md-12 rejeitado"></thf-input>
+      </div>
+      <div *ngIf="modal_type == 'decisao'">
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Ficha CQ" t-disabled="true"></thf-input>
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Serie" t-disabled="true"></thf-input>
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Cod. Fornec" t-disabled="true"></thf-input>
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Documento" t-disabled="true"></thf-input>
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Serie" t-disabled="true"></thf-input>
+        <thf-input class="thf-md-2 thf-sm-4" t-label="Descrição" t-disabled="true"></thf-input>
+
+        <thf-input class="thf-md-4 thf-sm-6" t-label="Data de Inspeção" [(ngModel)]="dataInspecao"></thf-input>
+
+        <thf-radio-group class="thf-md-12" t-label="Tipo Retorno" [t-options]="columnOptions" [t-columns]="columnsRadio"
+          [(ngModel)]="tipoRetorno">
+        </thf-radio-group>
+
+        <thf-textarea class="thf-md-12" [(ngModel)]="textoArea"></thf-textarea>
+
+        <ng-container *ngIf="tipoRetorno != 1">
+
+          <thf-input class="thf-md-2 thf-sm-6" t-label="Sequencia" [(ngModel)]="sequencia"></thf-input>
+          <thf-input class="thf-md-2 thf-sm-6" t-label="Cod. Dev." [(ngModel)]="codDevolucao"></thf-input>
+          <thf-input class="thf-md-8 thf-sm-6" t-label="Descrição" t-disabled="true" [(ngModel)]="descricao">
+          </thf-input>
+
+          <thf-input class="thf-md-2 thf-sm-6" t-label="Item" [(ngModel)]="item"></thf-input>
+          <thf-input class="thf-md-3 thf-sm-6" t-label="Qtd. Aprov. Cond." [(ngModel)]="qtdAprCondicional"></thf-input>
+          <thf-input class="thf-md-7 thf-sm-6" t-label="Observação" [(ngModel)]="observacao"></thf-input>
+
+          <thf-table class="thf-md-12 thf-sm-12 tableDec" [t-columns]="columnsDec" detailHideSelect="true" t-container="border"
+            t-sort="true" t-striped="true">
+          </thf-table>
+        </ng-container>
+        <thf-input class="thf-md-4 thf-sm-6" t-label="Depósito" [(ngModel)]="deposito"></thf-input>
+        <thf-input class="thf-md-8 thf-sm-6" t-label="Localização" t-disabled="true" [(ngModel)]="localizacao">
+        </thf-input>
+      </div>
+    </thf-modal>
+
+
+    <div class="roteiros">
+      <p class="paragraph">Roteiros de Controle de Qualidade</p>
+      <thf-table t-checkbox t-single-select (t-selected)="filterArray($event)" (t-unselected)="clearFilterArray()"
+        detailHideSelect="true" t-container="border" t-sort="true" t-striped="true" [t-columns]="columns"
+        [t-items]="tableData">
+      </thf-table>
+    </div>
+
+    <div class="exames">
+      <p class="paragraph">Exames de Ficha CQ</p>
+      <thf-table detailHideSelect="true" t-container="border" t-sort="true" t-striped="true" [t-columns]="columnsExame"
+        [t-items]="filteredArray">
+      </thf-table>
+    </div>
+
+
+    <div>
+      <thf-loading-overlay t-screen-lock="true" t-text="Carregando" [hidden]="isHideLoading"></thf-loading-overlay>
+    </div>
+
+  </thf-page-default>
+</div>
