@@ -157,7 +157,7 @@ export class TabelaComponent implements OnInit {
     label: 'Confirmar',
     danger: false,
     action: () => {
-      this.thfDialog.alert({ title: 'Atenção', message: this.tipoRetorno })
+      this.thfDialog.alert({ title: 'Atenção', message: this.sequencia })
     }
   }
 
