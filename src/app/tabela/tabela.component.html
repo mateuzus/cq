@@ -17,7 +17,7 @@
     <thf-button class="btn-filter" t-label="Filtro" (t-click)="openModalFilter()" t-type="primary"></thf-button>
     <thf-button t-label="Decisão" t-type="primary" (t-click)="openModalDecisao()"></thf-button>
 
-    <thf-modal class="filtro" title="Filtro" [t-primary-action]="getPrimaryAction()"
+    <thf-modal class="filtro" [t-primary-action]="getPrimaryAction()"
       [t-secondary-action]="getSecondaryAction()" t-click-out="true">
       <div *ngIf="modal_type == 'filter'">
         <thf-input class="thf-md-6 thf-sm-6" [(ngModel)]="it_codigo_ini" t-label="Cód. Item Ini" J></thf-input>
@@ -93,8 +93,9 @@
         <thf-input class="thf-md-2 thf-sm-4" t-label="Documento" t-disabled="true"></thf-input>
         <thf-input class="thf-md-2 thf-sm-4" t-label="Serie" t-disabled="true"></thf-input>
         <thf-input class="thf-md-2 thf-sm-4" t-label="Descrição" t-disabled="true"></thf-input>
+        
 
-        <thf-input class="thf-md-4 thf-sm-6" t-label="Data de Inspeção" [(ngModel)]="dataInspecao"></thf-input>
+        <thf-input class="thf-md-4 thf-sm-6" t-label="Data de Inspeção" [(ngModel)]="dataInspecao" t-mask="dd/mm/YYYY"></thf-input>
 
         <thf-radio-group class="thf-md-12" t-label="Tipo Retorno" [t-options]="columnOptions" [t-columns]="columnsRadio"
           [(ngModel)]="tipoRetorno">

@@ -87,7 +87,7 @@ export class TabelaComponent implements OnInit {
   loadTableColumns(): this {
     this.columns = this.tabelaService.getColumns()
     this.columnsExame = this.tabelaService.getExames(this)
-    this.columnsDec = this.tabelaService.getColumnsDecisao()
+    this.columnsDec = this.tabelaService.getColumnsDecisao(this)
     return this
   }
 
@@ -160,7 +160,7 @@ export class TabelaComponent implements OnInit {
     label: 'Confirmar',
     danger: false,
     action: () => {
-      this.thfDialog.alert({ title: 'Atenção', message: this.sequencia })
+      this.thfDialog.alert({ title: 'Atenção', message: this.dataInspecao })
     }
   }
 
@@ -182,7 +182,7 @@ export class TabelaComponent implements OnInit {
 
   addSequencia() {
     this.sequenciaArray.push({'sequencia': this.sequencia})
-    console.log(this.sequenciaArray)
+    this.addActionOnItensDecisao()
   }
 
   openModalFilter(): void {
@@ -193,6 +193,16 @@ export class TabelaComponent implements OnInit {
   openModalDecisao(): void {
     this.modal_type = 'decisao'
     this.thfModal.open()
+  }
+
+  deleteRowDecisao(row: any): void {
+    /* let posicao = this.sequenciaArray.indexOf(row) */
+    this.sequenciaArray.splice(row, 1)
+    console.log(this.sequenciaArray)
+    /* let deleted = this.sequenciaArray.filter((item) => {
+      return item != row
+    })
+    console.log(deleted) */
   }
 
   closeModal(): void {
@@ -216,7 +226,7 @@ export class TabelaComponent implements OnInit {
       texto: this.modal_primary_action_texto,
       numerico: this.modal_primary_action_numerico,
       faixa: this.modal_primary_action_faixa,
-      decisao: this.modal_primary_action_decisao
+      decisao: this.modal_primary_action_decisao,
     }
 
     return actions[this.modal_type]
@@ -224,10 +234,10 @@ export class TabelaComponent implements OnInit {
 
   getSecondaryAction(): any {
     let actions = {
-      filter: this.modal_secondary_action_close,
-      texto: this.modal_secondary_action_close,
-      numerico: this.modal_secondary_action_close,
-      faixa: this.modal_secondary_action_close,
+      filter: this.modal_secondary_action_close_decisao,
+      texto: this.modal_secondary_action_close_decisao,
+      numerico: this.modal_secondary_action_close_decisao,
+      faixa: this.modal_secondary_action_close_decisao,
       decisao: this.modal_secondary_action_close_decisao
     }
 
@@ -237,6 +247,13 @@ export class TabelaComponent implements OnInit {
   addActionsOnItens(): void {
     this.filteredArray = this.filteredArray.map((item: any) => {
       item["actions"] = ["digitar"]
+      return item
+    })
+  }
+
+  addActionOnItensDecisao(): void {
+    this.sequenciaArray = this.sequenciaArray.map((item: any) => {
+      item["actions"] = ["deletar"]
       return item
     })
   }

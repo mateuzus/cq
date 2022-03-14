@@ -25,8 +25,28 @@ export class TabelaService {
     ]
   }
 
-  getColumnsDecisao(): Array<ThfTableColumn> {
+  getColumnsDecisao(component_instance: any): Array<ThfTableColumn> {
     return [
+      {
+        property: "actions", 
+        label: "Ações", 
+        type: "icon", 
+        icons: [
+          {
+            action: (value: any, row: any) => {
+              component_instance.deleteRowDecisao(
+                value, 
+                row,
+              )
+            },
+            color: "primary",
+            icon: "thf-icon thf-icon-delete",
+            tooltip: "Clique aqui para deletar",
+            value: "deletar"
+          }
+        ]
+      },
+
       { property: 'sequencia', label: 'Seq' },
       { property: '', label: 'Decisão' },
       { property: '', label: 'Cod Dev' },
@@ -38,12 +58,12 @@ export class TabelaService {
     ]
   }
 
-  getExames(component_instance) {
+  getExames(component_instance: any): Array<ThfTableColumn> {
     return [
       {
         property: "actions", label: "Ações", type: "icon", icons: [
           {
-            action: (value, row) => {
+            action: (value: any, row: any) => {
               component_instance.abrirModalDetalhe(
                 value, row
               )
@@ -74,7 +94,7 @@ export class TabelaService {
   }
 
 
-  apiEscq(params?, sucess_func?, error_func?) {
+  apiEscq(params?: any, sucess_func?: any, error_func?: any) {
     let url = this.baseUrl + 'api-escq100.r'
 
     let headers_send = new HttpHeaders();
