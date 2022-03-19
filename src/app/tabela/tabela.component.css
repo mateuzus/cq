@@ -56,6 +56,11 @@
     margin-top: 32px;
   }
 
+  .btnSalvarDel{
+    margin-left: -10px;
+    margin-top: 32px;
+  }
+
   @media(max-width: 574px) {
     .filtro{
       margin-top: -50px;

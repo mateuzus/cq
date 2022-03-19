@@ -40,6 +40,8 @@ export class TabelaComponent implements OnInit {
   exames: any
   menuItemSelected: string;
 
+  valorLinha: any
+
   thousandMaxlength: number = 7
 
   codExame: any
@@ -181,7 +183,7 @@ export class TabelaComponent implements OnInit {
   }
 
   addSequencia() {
-    this.sequenciaArray.push({'sequencia': this.sequencia})
+    this.sequenciaArray.push({ 'sequencia': this.sequencia })
     this.addActionOnItensDecisao()
   }
 
@@ -196,13 +198,28 @@ export class TabelaComponent implements OnInit {
   }
 
   deleteRowDecisao(row: any): void {
-    /* let posicao = this.sequenciaArray.indexOf(row) */
-    this.sequenciaArray.splice(row, 1)
+
+    this.sequenciaArray = []
+    /* let posicao = this.sequenciaArray.indexOf(row)
+
+    console.log(posicao)
+    if(posicao != 0) {
+      this.sequenciaArray.slice(posicao, 1)
+    }else{
+      
+      this.sequenciaArray.pop()
+    }
+
     console.log(this.sequenciaArray)
-    /* let deleted = this.sequenciaArray.filter((item) => {
+    console.log(this.sequenciaArray) */
+
+    /* this.sequenciaArray = this.sequenciaArray.filter((item) => {
       return item != row
-    })
-    console.log(deleted) */
+    }) */
+  }
+
+  selectedRow(row: any) {
+    console.log(row)
   }
 
   closeModal(): void {

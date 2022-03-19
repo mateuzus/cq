@@ -112,10 +112,11 @@
 
           <thf-input class="thf-md-2 thf-sm-6" t-label="Item" [(ngModel)]="item"></thf-input>
           <thf-input class="thf-md-3 thf-sm-6" t-label="Qtd. Aprov. Cond." [(ngModel)]="qtdAprCondicional"></thf-input>
-          <thf-input class="thf-md-6 thf-sm-6" t-label="Observação" [(ngModel)]="observacao"></thf-input>
+          <thf-input class="thf-md-5 thf-sm-6" t-label="Observação" [(ngModel)]="observacao"></thf-input>
           <thf-button class="thf-md-1 btnSalvarDec" t-icon="thf-icon thf-icon-plus-circle" (t-click)="addSequencia()" t-type="primary"></thf-button>
+          <thf-button class="thf-md-1 btnSalvarDel" t-type="danger" t-icon="thf-icon thf-icon-delete" (t-click)="deleteRowDecisao()"></thf-button>
 
-          <thf-table class="thf-md-12 thf-sm-12 tableDec" [t-columns]="columnsDec" [t-items]="sequenciaArray" detailHideSelect="true" t-container="border"
+          <thf-table class="thf-md-12 thf-sm-12 tableDec" (t-selected)="selectedRow($event)" t-checkbox="true" [t-columns]="columnsDec" [t-items]="sequenciaArray" detailHideSelect="true" t-container="border"
             t-sort="true" t-striped="true">
           </thf-table>
         </ng-container>

@@ -27,7 +27,7 @@ export class TabelaService {
 
   getColumnsDecisao(component_instance: any): Array<ThfTableColumn> {
     return [
-      {
+      /* {
         property: "actions", 
         label: "Ações", 
         type: "icon", 
@@ -45,7 +45,7 @@ export class TabelaService {
             value: "deletar"
           }
         ]
-      },
+      }, */
 
       { property: 'sequencia', label: 'Seq' },
       { property: '', label: 'Decisão' },
