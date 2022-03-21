@@ -198,28 +198,30 @@ export class TabelaComponent implements OnInit {
   }
 
   deleteRowDecisao(row: any): void {
+     console.log(row)
+    this.sequenciaArray.splice(row, 1) 
 
-    this.sequenciaArray = []
-    /* let posicao = this.sequenciaArray.indexOf(row)
+    
+    /* let posicao = this.sequenciaArray.indexOf(row) 
 
-    console.log(posicao)
     if(posicao != 0) {
-      this.sequenciaArray.slice(posicao, 1)
+      this.sequenciaArray.splice(posicao, 1)
     }else{
       
       this.sequenciaArray.pop()
-    }
-
-    console.log(this.sequenciaArray)
-    console.log(this.sequenciaArray) */
+    } */
+    
+    /* this.sequenciaArray = [] */
+    /* if(posicao != 0) {
+      this.sequenciaArray.splice(posicao, 1)
+    }else{
+      
+      this.sequenciaArray.pop()
+    } */
 
     /* this.sequenciaArray = this.sequenciaArray.filter((item) => {
       return item != row
     }) */
-  }
-
-  selectedRow(row: any) {
-    console.log(row)
   }
 
   closeModal(): void {
