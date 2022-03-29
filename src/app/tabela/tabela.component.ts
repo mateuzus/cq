@@ -35,6 +35,7 @@ export class TabelaComponent implements OnInit {
   columns: Array<ThfTableColumn>
   columnsExame: Array<ThfTableColumn>
   filteredArray: any
+  tipoResultado: string
 
   tableData: any
   exames: any
@@ -198,10 +199,12 @@ export class TabelaComponent implements OnInit {
   }
 
   deleteRowDecisao(row: any): void {
-     console.log(row)
-    this.sequenciaArray.splice(row, 1) 
+    this.sequenciaArray = []
 
-    
+    /* console.log(row)
+    this.sequenciaArray.splice(row, 1) */
+
+
     /* let posicao = this.sequenciaArray.indexOf(row) 
 
     if(posicao != 0) {
@@ -210,8 +213,7 @@ export class TabelaComponent implements OnInit {
       
       this.sequenciaArray.pop()
     } */
-    
-    /* this.sequenciaArray = [] */
+
     /* if(posicao != 0) {
       this.sequenciaArray.splice(posicao, 1)
     }else{
@@ -229,12 +231,13 @@ export class TabelaComponent implements OnInit {
   }
 
   abrirModalDetalhe(row: any): void {
+    console.log(row["desc-tipo-result"].toLowerCase())
     let index = this.filteredArray.indexOf(row)
     this.ultimo = index == this.filteredArray.length - 1
     this.codExame = row["cod-exame"]
     this.descComp = row["descricao-comp"]
     this.valorComp = row["vl-referencia"]
-    this.modal_type = 'faixa'
+    this.modal_type = row["desc-tipo-result"].toLowerCase()
     this.index = this.filteredArray.indexOf(row)
     this.thfModal.open()
   }
@@ -264,10 +267,12 @@ export class TabelaComponent implements OnInit {
   }
 
   addActionsOnItens(): void {
-    this.filteredArray = this.filteredArray.map((item: any) => {
-      item["actions"] = ["digitar"]
-      return item
-    })
+    if(this.filteredArray != undefined){
+      this.filteredArray = this.filteredArray.map((item: any) => {
+        item["actions"] = ["digitar"]
+        return item
+      })
+    }
   }
 
   addActionOnItensDecisao(): void {
