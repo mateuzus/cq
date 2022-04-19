@@ -122,11 +122,11 @@ export class TabelaComponent implements OnInit {
     danger: false,
     action: () => {
       let obj = this.filteredArray[this.index + 1]
+      this.modal_type = obj["desc-tipo-result"].toLowerCase()
       this.codExame = obj["cod-exame"]
       this.descComp = obj["descricao-comp"]
       this.valorComp = obj["valores"]
       this.index = this.filteredArray.indexOf(obj)
-
       this.ultimo = this.index == this.filteredArray.length - 1
     }
   }
@@ -140,7 +140,7 @@ export class TabelaComponent implements OnInit {
       this.descComp = obj["descricao-comp"]
       this.valorComp = obj["valores"]
       this.index = this.filteredArray.indexOf(obj)
-
+      console.log(this.modal_type)
       this.ultimo = this.index == this.filteredArray.length - 1
     }
   }
@@ -154,7 +154,7 @@ export class TabelaComponent implements OnInit {
       this.descComp = obj["descricao-comp"]
       this.valorComp = obj["valores"]
       this.index = this.filteredArray.indexOf(obj)
-
+      console.log(this.modal_type)
       this.ultimo = this.index == this.filteredArray.length - 1
     }
   }
@@ -164,14 +164,6 @@ export class TabelaComponent implements OnInit {
     danger: false,
     action: () => {
       this.thfDialog.alert({ title: 'Atenção', message: this.dataInspecao })
-    }
-  }
-
-  private modal_secondary_action_close: ThfModalAction = {
-    label: 'Fechar',
-    danger: true,
-    action: () => {
-      this.thfModal.close()
     }
   }
 
@@ -231,13 +223,13 @@ export class TabelaComponent implements OnInit {
   }
 
   abrirModalDetalhe(row: any): void {
-    console.log(row["desc-tipo-result"].toLowerCase())
+    this.modal_type = row["desc-tipo-result"].toLowerCase()
+    console.log(this.modal_type)
     let index = this.filteredArray.indexOf(row)
     this.ultimo = index == this.filteredArray.length - 1
     this.codExame = row["cod-exame"]
     this.descComp = row["descricao-comp"]
     this.valorComp = row["vl-referencia"]
-    this.modal_type = row["desc-tipo-result"].toLowerCase()
     this.index = this.filteredArray.indexOf(row)
     this.thfModal.open()
   }
@@ -246,8 +238,8 @@ export class TabelaComponent implements OnInit {
     let actions = {
       filter: this.modal_primary_action_confirm,
       texto: this.modal_primary_action_texto,
-      numerico: this.modal_primary_action_numerico,
-      faixa: this.modal_primary_action_faixa,
+      numerico: this.modal_primary_action_texto,
+      faixa: this.modal_primary_action_texto,
       decisao: this.modal_primary_action_decisao,
     }
 
